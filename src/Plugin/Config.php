@@ -3,14 +3,34 @@ declare(strict_types=1);
 
 namespace OM\WysiwygWidgets\Plugin;
 
+use Magento\Ui\Component\Wysiwyg\ConfigInterface;
+use Magento\Framework\DataObject;
+
 class Config
 {
-    public function afterGetConfig(
-        \Magento\Ui\Component\Wysiwyg\ConfigInterface $configInterface,
-        \Magento\Framework\DataObject $result
-    ): \Magento\Framework\DataObject
+    /**
+     * @param \Magento\Ui\Component\Wysiwyg\ConfigInterface $configInterface
+     * @param $data
+     * @return array|array[]
+     */
+    public function beforeGetConfig(ConfigInterface $configInterface, $data = []): array
     {
-        $settings = $result->getData('settings');
-        echo '<pre>';print_r($settings);exit;
+        $data['add_variables'] = true;
+        $data['add_widgets'] = true;
+        return [$data];
+    }
+
+    /**
+     * @param \Magento\Ui\Component\Wysiwyg\ConfigInterface $configInterface
+     * @param \Magento\Framework\DataObject $result
+     * @return \Magento\Framework\DataObject
+     */
+    public function afterGetConfig(ConfigInterface $configInterface, DataObject $result): DataObject
+    {
+        $tinymce = $result->getData('tinymce');
+        $tinymce['toolbar'] = 'magentovariable magentowidget |' . $tinymce['toolbar'] . ' fullscreen';
+        $tinymce['plugins'] = 'magentovariable magentowidget |' . $tinymce['plugins'] . ' fullscreen';
+        $result->setData('tinymce', $tinymce);
+        return $result;
     }
 }

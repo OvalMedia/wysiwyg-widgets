@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<type name="Magento\Ui\Component\Wysiwyg\ConfigInterface">
+		<plugin name="OM_WysiwygWidgets_Plugin_Magento_Ui_Component_Wysiwyg_ConfigInterface" type="OM\WysiwygWidgets\Plugin\Config"/>
+	</type>
+</config>
