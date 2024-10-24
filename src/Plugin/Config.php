@@ -10,10 +10,10 @@ class Config
 {
     /**
      * @param \Magento\Ui\Component\Wysiwyg\ConfigInterface $configInterface
-     * @param $data
-     * @return array|array[]
+     * @param array $data
+     * @return array[]
      */
-    public function beforeGetConfig(ConfigInterface $configInterface, $data = []): array
+    public function beforeGetConfig(ConfigInterface $configInterface, array $data = []): array
     {
         $data['add_variables'] = true;
         $data['add_widgets'] = true;
@@ -28,8 +28,8 @@ class Config
     public function afterGetConfig(ConfigInterface $configInterface, DataObject $result): DataObject
     {
         $tinymce = $result->getData('tinymce');
-        $tinymce['toolbar'] = 'magentovariable magentowidget |' . $tinymce['toolbar'] . ' fullscreen';
-        $tinymce['plugins'] = 'magentovariable magentowidget |' . $tinymce['plugins'] . ' fullscreen';
+        $tinymce['toolbar'] = 'magentovariable magentowidget |' . $tinymce['toolbar'] . ' | blockquote | visualblocks | fullscreen';
+        $tinymce['plugins'] = 'magentovariable magentowidget |' . $tinymce['plugins'] . ' | fullscreen';
         $result->setData('tinymce', $tinymce);
         return $result;
     }
